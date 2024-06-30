@@ -33,6 +33,8 @@ const Main = () => {
               className={styles.input}
               required
             />
+          </div>
+          <div className={styles.group}>
             <input
               type="text"
               name="room"

@@ -17,6 +17,20 @@ const io = new Server(server, {
         methods: ['GET', 'POST']
     }
 })
-server.listen(6000, ()=>{
+
+io.on('connection', (socket) =>{
+    socket.on('join', ({name, room}) =>{
+        socket.join(room);
+        socket.emit('message', {
+            data: {user: {name: 'Admin'}, message: `Hey ${name}`}
+        })
+    })
+
+    io.on('disconnect', () => {
+        console.log('disconnect');
+    })
+})
+
+server.listen(8080, ()=>{
     console.log('Server is running')
 })
