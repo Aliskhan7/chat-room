@@ -28,7 +28,7 @@ const Main = () => {
               name="name"
               placeholder="USername"
               value={values[NAME]}
-              autoComplete={false}
+              autoComplete="off"
               onChange={handlerChange}
               className={styles.input}
               required
@@ -40,7 +40,7 @@ const Main = () => {
               name="room"
               placeholder="Room"
               value={values[ROOM]}
-              autoComplete={false}
+              autoComplete="off"
               onChange={handlerChange}
               className={styles.input}
               required
@@ -49,7 +49,7 @@ const Main = () => {
           <Link
             className={styles.group}
             onClick={handlerClick}
-            to={`/chat?name${values[NAME]}&room=${values[ROOM]}`}
+            to={`/chat?name=${values[NAME]}&room=${values[ROOM]}`}
           >
             <button type="submit" className={styles.button}>
               Sign in
