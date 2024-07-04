@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { io } from "socket.io-client";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styles from "../styles/Chat.module.css";
 import icon from "../images/emoji.svg";
 import EmojiPicker from "emoji-picker-react";
@@ -10,10 +10,12 @@ const socket = io.connect("http://localhost:8080");
 
 const Chat = () => {
   const { search } = useLocation();
+  const navigate = useNavigate();
   const [params, setParams] = useState({ user: "", room: "" });
   const [state, setState] = useState([]);
   const [message, setMessage] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+  const [users, setUsers] = useState(0);
 
   useEffect(() => {
     const searchParams = Object.fromEntries(new URLSearchParams(search));
@@ -28,11 +30,22 @@ const Chat = () => {
     });
   }, []);
 
-  const leftRoom = () => {};
+  useEffect(() => {
+    socket.on("room", ({ data: { users } }) => {
+      setUsers(users.length);
+    });
+  }, []);
+
+  const leftRoom = () => {
+    socket.emit("leftRoom", { params });
+    navigate("/");
+  };
   const handlerChange = ({ target: { value } }) => setMessage(value);
   const onEmojiClick = ({ emoji }) => setMessage(`${message} ${emoji}`);
-  const handlerSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!message) return;
 
     socket.emit("sendMessage", { message, params });
 
@@ -44,7 +57,7 @@ const Chat = () => {
     <div className={styles.wrap}>
       <div className={styles.header}>
         <div className={styles.title}>{params.room}</div>
-        <div className={styles.users}> 0 users</div>
+        <div className={styles.users}> {users} users</div>
         <button className={styles.left} onClick={leftRoom}>
           Left the room
         </button>
@@ -52,7 +65,7 @@ const Chat = () => {
       <div className={styles.messages}>
         <Messages messages={state} name={params.name} />
       </div>
-      <form className={styles.form}>
+      <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.input}>
           <input
             type="text"
@@ -76,7 +89,7 @@ const Chat = () => {
           <input
             className={styles.button}
             type="submit"
-            onSubmit={handlerSubmit}
+            onSubmit={handleSubmit}
             value="Send a message"
           />
         </div>
