@@ -16,7 +16,7 @@
     padding: 10px;
     border-radius: 12px;
     font-size: 15px;
-    color: #fff;
+    color: #333;
 }
 
 .user {
@@ -24,12 +24,14 @@
     color: rgb(176, 176, 176);
 }
 
+
 .user {
     align-items: flex-start;
 }
 
 .user .text {
-    background: #514c4c;
+    background: #fdffff;
+    box-shadow: 0px 0px 12px -18px rgba(0,0,0,0.75);
 }
 
 .user .user {
@@ -41,9 +43,23 @@
 }
 
 .me .text {
-    background: #0d49d7;
+    background: #467eff;
+    color: #fafafa;
 }
 
 .me .user {
     padding-right: 10px;
+}
+.adminText{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.adminText .user {
+    color: rgb(119, 117, 117);
+}
+.adminText .text{
+    background-color: transparent;
+    border-radius: 0;
+    color: rgb(176, 176, 176);
 }
