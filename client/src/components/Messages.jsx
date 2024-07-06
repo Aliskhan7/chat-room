@@ -11,7 +11,10 @@ const Messages = ({ messages, name }) => {
         const className = itsMe ? styles.me : styles.user;
 
         return (
-          <div key={i} className={`${styles.message} ${className}`}>
+          <div
+            key={i}
+            className={`${user.name === "Admin" ? styles.adminText : styles.message} ${className}`}
+          >
             <span className={styles.user}>{user.name}</span>
 
             <div className={styles.text}>{message}</div>

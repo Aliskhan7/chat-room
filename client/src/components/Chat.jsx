@@ -3,6 +3,8 @@ import { io } from "socket.io-client";
 import { useLocation, useNavigate } from "react-router-dom";
 import styles from "../styles/Chat.module.css";
 import icon from "../images/emoji.svg";
+import send from "../images/send.svg";
+import exit from "../images/exit.svg";
 import EmojiPicker from "emoji-picker-react";
 import Messages from "./Messages";
 
@@ -59,7 +61,7 @@ const Chat = () => {
         <div className={styles.title}>{params.room}</div>
         <div className={styles.users}> {users} users this room</div>
         <button className={styles.left} onClick={leftRoom}>
-          Left the room
+          <img src={exit} alt="" />
         </button>
       </div>
       <div className={styles.messages}>
@@ -86,12 +88,9 @@ const Chat = () => {
           )}
         </div>
         <div>
-          <input
-            className={styles.button}
-            type="submit"
-            onSubmit={handleSubmit}
-            value="Send a message"
-          />
+          <button className={styles.button}>
+            <img src={send} alt="" />
+          </button>
         </div>
       </form>
     </div>
