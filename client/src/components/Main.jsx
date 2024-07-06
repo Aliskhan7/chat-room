@@ -26,7 +26,7 @@ const Main = () => {
             <input
               type="text"
               name="name"
-              placeholder="USername"
+              placeholder="Name"
               value={values[NAME]}
               autoComplete="off"
               onChange={handlerChange}
