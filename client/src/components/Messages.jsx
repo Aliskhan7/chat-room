@@ -15,7 +15,7 @@ const Messages = ({ messages, name }) => {
             key={i}
             className={`${user.name === "Admin" ? styles.adminText : styles.message} ${className}`}
           >
-            <span className={styles.user}>{user.name}</span>
+            <span className={styles.user}>{user?.name}</span>
 
             <div className={styles.text}>{message}</div>
           </div>
