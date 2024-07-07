@@ -8,7 +8,7 @@ import exit from "../images/exit.svg";
 import EmojiPicker from "emoji-picker-react";
 import Messages from "./Messages";
 
-const socket = io.connect("http://localhost:8080");
+const socket = io.connect("https://chat-room-backend-1pz6.onrender.com");
 
 const Chat = () => {
   const { search } = useLocation();
